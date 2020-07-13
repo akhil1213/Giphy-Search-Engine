@@ -6,7 +6,7 @@ import Box from '@material-ui/core/Box';
 import { getGiphies } from '../../api/giphy'
 import Images from '../GiphyResults/Images'
 import ClipLoader from "react-spinners/ClipLoader";
-
+import {connect} from 'react-redux'
 const useStyles = makeStyles(theme => ({
   root: {
     padding: "10px 5px 10px 0px",
@@ -28,14 +28,14 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 //make sure enter key up triggers call to api even without clicking button
-export default function Search(props) {
+function Search({rating}) {
   const classes = useStyles();
   const [currentText, setCurrentText] = useState('')
   const [loading,setLoading] = useState(false)
   const [giphies,setGiphies] = useState([])
   const callApi = async () => {
     setLoading(true) 
-    getGiphies(currentText)
+    getGiphies(currentText,rating)
      .then((res) => {
       const data = res.data['data']
       setGiphies(data)
@@ -69,3 +69,12 @@ export default function Search(props) {
     
   );
 }
+
+const mapStateToProps = (state) => ({
+  rating:state.rating
+})
+
+export default connect(
+  mapStateToProps,
+  null
+)(Search);
