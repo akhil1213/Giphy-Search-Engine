@@ -33,6 +33,7 @@ const useStyles = makeStyles({
 export default function Ratings(props){
     const classes = useStyles()
     const [rating,setRating] = useState('pg')
+    
     return (
       <React.Fragment>
         <Paper className={classes.paper}>

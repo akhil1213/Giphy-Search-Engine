@@ -5,6 +5,8 @@ import { Typography, Button } from "@material-ui/core";
 import Box from '@material-ui/core/Box';
 import { getGiphies } from '../../api/giphy'
 import Images from '../GiphyResults/Images'
+import ClipLoader from "react-spinners/ClipLoader";
+
 const useStyles = makeStyles(theme => ({
   root: {
     padding: "10px 5px 10px 0px",
@@ -25,24 +27,27 @@ const useStyles = makeStyles(theme => ({
     margin: 4
   }
 }));
-
+//make sure enter key up triggers call to api even without clicking button
 export default function Search(props) {
   const classes = useStyles();
   const [currentText, setCurrentText] = useState('')
+  const [loading,setLoading] = useState(false)
   const [giphies,setGiphies] = useState([])
   const callApi = async () => {
-     getGiphies(currentText)
+    setLoading(true) 
+    getGiphies(currentText)
      .then((res) => {
       const data = res.data['data']
       setGiphies(data)
+      setLoading(false)
       // console.log(data[0].images.downsized_medium.url)
     }).catch((err) =>{
+        setLoading(false)
         return err
     })
   }
   return (
     <React.Fragment>
-
       <Box borderRadius={16} className={classes.root} borderTop={1} borderBottom={1} borderRight={1} borderLeft={1}>
         <InputBase
             className={classes.input}
@@ -54,6 +59,11 @@ export default function Search(props) {
           Enter
         </Button>
       </Box>
+      <ClipLoader
+          size={150}
+          color={"#123abc"}
+          loading={loading}
+        />
       <Images imageUrls={giphies} />
     </React.Fragment>
     
