@@ -3,7 +3,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import InputBase from "@material-ui/core/InputBase";
 import { Typography, Button } from "@material-ui/core";
 import Box from '@material-ui/core/Box';
-import getGiphies from '../../api/giphy'
+import { getGiphies } from '../../api/giphy'
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -30,7 +30,7 @@ export default function Search(props) {
   const classes = useStyles();
   const [currentText, setCurrentText] = useState('')
   const callApi = () => {
-    console.log(getGiphies.getGiphies(currentText))
+    console.log(getGiphies(currentText))
   }
   return (
     <Box borderRadius={16} className={classes.root} borderTop={1} borderBottom={1} borderRight={1} borderLeft={1}>
