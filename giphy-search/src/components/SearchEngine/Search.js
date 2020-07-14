@@ -7,24 +7,23 @@ import { getGiphies } from '../../api/giphy'
 import Images from '../GiphyResults/Images'
 import ClipLoader from "react-spinners/ClipLoader";
 import {connect} from 'react-redux'
+import SearchIcon from '@material-ui/icons/Search';
+
 const useStyles = makeStyles(theme => ({
-  root: {
+  searchBox: {
     padding: "10px 5px 10px 0px",
     display: "flex",
     alignItems: "center",
-    width: '80%',
+    width: '90%',
     borderColor:'#eaebdd',
+    marginTop:'3%'
   },
   input: {
     marginLeft: theme.spacing(4),
     flex: 1
   },
-  iconButton: {
-    padding: 10
-  },
-  divider: {
-    height: 28,
-    margin: 4
+  center:{
+    textAlign:'center'
   }
 }));
 //make sure enter key up triggers call to api even without clicking button
@@ -33,11 +32,14 @@ function Search({rating}) {
   const [currentText, setCurrentText] = useState('')
   const [loading,setLoading] = useState(false)
   const [giphies,setGiphies] = useState([])
+  const [errorMsg, setErrorMsg] = useState('')
   const callApi = async () => {
     setLoading(true) 
     getGiphies(currentText,rating)
      .then((res) => {
+      console.log(rating)
       const data = res.data['data']
+      if(data.length === 0) setErrorMsg('No results!')
       setGiphies(data)
       setLoading(false)
       // console.log(data[0].images.downsized_medium.url)
@@ -47,8 +49,12 @@ function Search({rating}) {
     })
   }
   return (
-    <React.Fragment>
-      <Box borderRadius={16} className={classes.root} borderTop={1} borderBottom={1} borderRight={1} borderLeft={1}>
+    <div className = {classes.root}>
+      <Typography  align = 'center' color = 'primary' variant = 'h1'>
+        Find GIPHY's
+      </Typography>
+      <Box borderRadius={16} className={classes.searchBox} borderTop={1} borderBottom={1} borderRight={1} borderLeft={1}>
+        <SearchIcon/>
         <InputBase
             className={classes.input}
             placeholder="Search Giphy Api"
@@ -60,13 +66,17 @@ function Search({rating}) {
           Enter
         </Button>
       </Box>
-      <ClipLoader
+      <div className={classes.center}>
+        <ClipLoader
           size={150}
           color={"#123abc"}
           loading={loading}
+          className={classes.center}
         />
-      <Images imageUrls={giphies} />
-    </React.Fragment>
+      </div>
+      
+      <Images imageUrls={giphies} errorMsg = {errorMsg}/>
+    </div>
     
   );
 }

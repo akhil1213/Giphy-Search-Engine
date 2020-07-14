@@ -6,6 +6,8 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import Paper from '@material-ui/core/Paper';
 import RatingCss from './rating.css'
+import { Typography } from "@material-ui/core";
+
 import { connect } from 'react-redux';
 
 const buttons = [
@@ -37,7 +39,10 @@ function Ratings({rating,setRating}){//getting fields out of props object which 
     
     return (
       <React.Fragment>
-        <Paper className={classes.paper}>
+        <Typography  color = 'primary'>
+            Select Rating
+        </Typography>
+        <Paper variant="outlined"  className={classes.paper}>
             <List>
             {buttons.map( (ratingObject) => {
                 return(
