@@ -53,6 +53,7 @@ function Search({rating}) {
             className={classes.input}
             placeholder="Search Giphy Api"
             onChange={e => setCurrentText(e.target.value)}
+            onKeyPress={event => event.key === 'Enter' && currentText !== '' ? callApi() : null}
             fullWidth
         />
         <Button onClick = {() => callApi()} disabled={currentText===''} variant="contained" color="primary">

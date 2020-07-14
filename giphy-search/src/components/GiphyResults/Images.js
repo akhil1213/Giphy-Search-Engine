@@ -9,7 +9,7 @@ const useStyles = makeStyles(theme => ({
        justifyContent:"center"
    },
    listContainer:{
-        maxHeight: '50%', 
+        height:'30%',
         overflow: 'auto',
         flex:'row'
    }
