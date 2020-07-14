@@ -8,15 +8,15 @@ Link: https://chrome.google.com/webstore/detail/redux-devtools/lmhkpmbekcpmknkli
 
 Use npm to install dependencies
 
-run the following commands in terminal:
-cd giphy-search
-npm install
-cd src
-cd api
-npm install
-cd ..
-cd ..
-npm run start
+run the following commands in terminal:<br/>
+cd giphy-search<br />
+npm install<br />
+cd src<br />
+cd api<br />
+npm install<br />
+cd ..<br />
+cd ..<br />
+npm run start<br />
 
 ## Usage
 make sure to be in Giphy-Search-Engine/giphy-search and run 'npm run start' in your terminal
