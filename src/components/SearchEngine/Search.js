@@ -10,13 +10,16 @@ import {connect} from 'react-redux'
 import SearchIcon from '@material-ui/icons/Search';
 
 const useStyles = makeStyles(theme => ({
+  searchContainer:{
+    display:'flex',
+    justifyContent:'center'
+  },
   searchBox: {
     padding: "10px 5px 10px 0px",
     display: "flex",
-    alignItems: "center",
-    width: '90%',
-    borderColor:'#eaebdd',
-    marginTop:'3%'
+    width: '60%',
+    borderColor:'#dbdbce',
+    marginTop:'3%',
   },
   input: {
     marginLeft: theme.spacing(4),
@@ -24,6 +27,13 @@ const useStyles = makeStyles(theme => ({
   },
   center:{
     textAlign:'center'
+  },
+  description:{
+    color:'#1e88e5'
+  },
+  searchIcon:{
+    paddingTop:'4px',
+    marginLeft:'15px'
   }
 }));
 //make sure enter key up triggers call to api even without clicking button
@@ -51,21 +61,27 @@ function Search({rating}) {
   return (
     <div className = {classes.root}>
       <Typography  align = 'center' color = 'primary' variant = 'h1'>
-        Find GIPHY's
+        Giphy Search Engine
       </Typography>
-      <Box borderRadius={16} className={classes.searchBox} borderTop={1} borderBottom={1} borderRight={1} borderLeft={1}>
-        <SearchIcon/>
-        <InputBase
-            className={classes.input}
-            placeholder="Search Giphy Api"
-            onChange={e => setCurrentText(e.target.value)}
-            onKeyPress={event => event.key === 'Enter' && currentText !== '' ? callApi() : null}
-            fullWidth
-        />
-        <Button onClick = {() => callApi()} disabled={currentText===''} variant="contained" color="primary">
-          Enter
-        </Button>
-      </Box>
+      <Typography  align = 'center' className={classes.description} variant = 'h6'>
+        Search for Gif's by entering a term or phrase
+      </Typography>
+      <div className = {classes.searchContainer}>
+        <Box borderRadius={20} className={classes.searchBox} borderTop={1} borderBottom={1} borderRight={1} borderLeft={1}>
+          <SearchIcon className={classes.searchIcon}/>
+          <InputBase
+              className={classes.input}
+              placeholder="What GIPHY are you looking for?"
+              onChange={e => setCurrentText(e.target.value)}
+              onKeyPress={event => event.key === 'Enter' && currentText !== '' ? callApi() : null}
+              fullWidth
+          />
+          <Button onClick = {() => callApi()} disabled={currentText===''} variant="contained" color="primary">
+            Enter
+          </Button>
+        </Box>
+      </div>
+      
       <div className={classes.center}>
         <ClipLoader
           size={150}

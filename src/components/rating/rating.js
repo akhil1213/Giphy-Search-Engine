@@ -30,6 +30,9 @@ const useStyles = makeStyles({
     },
     textcenter:{
         textAlign:'center'
+    },
+    description:{
+        color:'#1e88e5'
     }
 })
 function Ratings({rating,setRating}){//getting fields out of props object which is from redux
@@ -39,7 +42,7 @@ function Ratings({rating,setRating}){//getting fields out of props object which 
     
     return (
       <React.Fragment>
-        <Typography  color = 'primary'>
+        <Typography  className={classes.description}>
             Select Rating
         </Typography>
         <Paper variant="outlined"  className={classes.paper}>
