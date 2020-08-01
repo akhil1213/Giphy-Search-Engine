@@ -1,6 +1,8 @@
 # Giphy-Search-Engine
 
 Giphy Search Engine allows you to choose your rating and then make a search query for giphy results!
+## Demo
+<img src = "giphysearch.gif"/>
 ## Requirements
 Redux Devtools extension must be installed
 Link: https://chrome.google.com/webstore/detail/redux-devtools/lmhkpmbekcpmknklioeibfkpmmfibljd?hl=en
